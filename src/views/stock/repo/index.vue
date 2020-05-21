@@ -318,6 +318,8 @@ export default {
           this.initStockData()
           break
       }
+    },
+    test(row) {
     }
   }
 }

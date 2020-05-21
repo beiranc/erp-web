@@ -18,7 +18,51 @@ export function craetePurchase(purchase) {
 }
 
 /**
- * 导出采购计划
+ * 获取指定用户的采购计划
+ */
+export function getPurchasesByName(userName, page, size) {
+  return request({
+    url: PURCHASE_API + '/user_name',
+    method: 'get',
+    params: {
+      userName,
+      page,
+      size
+    }
+  })
+}
+
+/**
+ * 获取所有的采购计划
+ */
+export function getPurchases(page, size) {
+  return request({
+    url: PURCHASE_API,
+    method: 'get',
+    params: {
+      page,
+      size
+    }
+  })
+}
+
+/**
+ * 根据采购计划状态查询
+ */
+export function getPurchasesByState(purchaseState, page, size) {
+  return request({
+    url: PURCHASE_API + '/state',
+    method: 'get',
+    params: {
+      purchaseState,
+      page,
+      size
+    }
+  })
+}
+
+/**
+ * 导出所有采购计划
  */
 export function exportPurchases(page, size) {
   return axios({
@@ -43,6 +87,19 @@ export function exportPurchases(page, size) {
 export function confirmPurchase(purchaseId) {
   return request({
     url: PURCHASE_API + '/confirm',
+    method: 'put',
+    params: {
+      purchaseId
+    }
+  })
+}
+
+/**
+ * 关闭采购计划
+ */
+export function closePurchase(purchaseId) {
+  return request({
+    url: PURCHASE_API + '/close',
     method: 'put',
     params: {
       purchaseId
