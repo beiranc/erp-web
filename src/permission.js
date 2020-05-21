@@ -22,7 +22,7 @@ router.beforeEach(async(to, from, next) => {
   const hasToken = getToken()
 
   // 打印 token
-  console.log(hasToken)
+  // console.log(hasToken)
   if (hasToken) {
     if (to.path === '/login') {
       // console.log('直接重定向')

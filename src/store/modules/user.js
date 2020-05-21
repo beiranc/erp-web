@@ -83,7 +83,7 @@ const actions = {
 
 export const setUserInfo = (res, commit) => {
   // 若没有任何权限，则赋予一个默认的权限，防止请求死循环
-  console.log(res)
+  // console.log(res)
   if (res.data.roles.lenth === 0) {
     // console.log('没有任何权限')
     commit('SET_ROLES', ['visitor'])
