@@ -1,6 +1,10 @@
 MIT License
 
+<<<<<<< HEAD
 Copyright (c) 2020 beiranc
+=======
+Copyright (c) 2017-present PanJiaChen
+>>>>>>> 7cbf756... 初始化前端项目，实现部分基本界面
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
