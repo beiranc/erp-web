@@ -36,7 +36,7 @@
           <svg-icon slot="prefix" icon-class="validCode" class="el-input__icon input-icon" />
         </el-input>
         <div class="login-code">
-          <img :src="codeUrl" @click="getCode">
+          <img :src="codeUrl" alt="验证码" @click="getCode">
         </div>
       </el-form-item>
 
@@ -48,6 +48,12 @@
       </el-form-item>
 
     </el-form>
+    <!-- 底部, 展示网站版权信息以及备案信息 -->
+    <div v-if="$store.state.settings.showFooter" id="erp-login-footer">
+      <span v-html="$store.state.settings.footerContent" />
+      <span> · </span>
+      <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">{{ $store.state.settings.caseNumber }}</a>
+    </div>
   </div>
 </template>
 
@@ -106,12 +112,12 @@ export default {
       immediate: true
     }
   },
-  created() {
-    this.getCode()
+  async created() {
+    await this.getCode()
   },
   methods: {
-    getCode() {
-      getCodeImg().then(res => {
+    async getCode() {
+      await getCodeImg().then(res => {
         this.codeUrl = res.url
         this.loginForm.codeKey = res.data
       })
@@ -150,7 +156,7 @@ export default {
     align-items: center;
     height: 100%;
     // 每日必应图片
-    background-image:url(https://api.isoyu.com/bing_images.php);
+    background-image:url(https://api.sunweihu.com/api/bing1/api.php);
     background-size: cover;
   }
   .title {
@@ -183,10 +189,23 @@ export default {
     width: 33%;
     display: inline-block;
     height: 38px;
-    // float: right;
-    img{
+    margin-left: 10px;
+    img {
       cursor: pointer;
       vertical-align:middle
     }
+  }
+
+  #erp-login-footer {
+    height: 40px;
+    line-height: 40px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    font-family: Arial, serif;
+    font-size: 12px;
+    letter-spacing: 1px;
   }
 </style>

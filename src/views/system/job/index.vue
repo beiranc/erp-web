@@ -13,7 +13,7 @@
             <el-switch v-model="createJob.jobState" active-value="ACTIVE" inactive-value="DISABLED" active-text="启用" inactive-text="禁用" />
           </el-form-item>
           <el-form-item label="所属部门">
-            <el-select v-model="createJob.dept.deptId" filterable placehodlder="请选择所属" value-key="deptName" size="medium">
+            <el-select v-model="createJob.dept.deptId" v-infinite-scroll="initDeptData" infinite-scroll-disabled="deptLoadDisabled" filterable placehodlder="请选择所属" value-key="deptName" size="medium">
               <el-option v-for="dept in deptData" :key="dept.deptId" :label="dept.deptName" :value="dept.deptId" />
             </el-select>
           </el-form-item>
@@ -68,7 +68,7 @@
             <el-input v-model.trim="editJob.jobName" size="medium" auto-complete="off" />
           </el-form-item>
           <el-form-item label="所属部门">
-            <el-select v-model="editJob.jobDept" filterable placehodlder="请选择所属部门" value-key="deptName" size="medium">
+            <el-select v-model="editJob.jobDept" v-infinite-scroll="initDeptData" infinite-scroll-disabled="deptLoadDisabled" filterable placehodlder="请选择所属部门" value-key="deptName" size="medium">
               <el-option v-for="dept in deptData" :key="dept.deptId" :label="dept.deptName" :value="dept" />
             </el-select>
           </el-form-item>
@@ -102,6 +102,8 @@ export default {
       page: 1,
       limit: 10,
       total: 0,
+      deptPage: 0,
+      deptLoadDisabled: false,
       loading: true,
       plain: true,
       round: true,
@@ -146,7 +148,6 @@ export default {
   },
   created() {
     this.initJobData()
-    this.initDeptData()
   },
   methods: {
     initJobData() {
@@ -160,12 +161,19 @@ export default {
       })
     },
     initDeptData() {
-      getAllDepts(0, 200).then(response => {
-        this.deptData = response.data.content
-        this.loading = false
+      getAllDepts(this.deptPage++, 10).then(response => {
+        if (response.data.numberOfElements === 0) {
+          this.$notify({
+            type: 'warning',
+            title: '提示',
+            message: '已加载' + response.data.totalElements + '条部门数据, ' + '没有更多的部门数据了~',
+            duration: 2000
+          })
+          this.deptLoadDisabled = true
+        }
+        response.data.content.forEach(c => this.deptData.push(c))
       }).catch(error => {
         console.log(error)
-        this.loading = false
       })
     },
     handleJobEdit(row) {

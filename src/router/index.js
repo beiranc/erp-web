@@ -463,6 +463,54 @@ export const asyncRoutes = [
     ]
   },
 
+  {
+    name: '报价单管理',
+    path: '/quotation-manage',
+    component: Layout,
+    alwaysShow: true,
+    redirect: 'noRedirect',
+    meta: {
+      title: '报价单管理',
+      icon: 'quotation',
+      roles: ['seller', 'saleManager']
+    },
+    children: [
+      {
+        name: 'Salesman',
+        path: 'salesman',
+        hidden: false,
+        component: () => import('@/views/quotation/salesman/index'),
+        meta: {
+          title: '业务员管理',
+          icon: 'salesman',
+          noCache: true
+        }
+      },
+      {
+        name: 'BasicInfo',
+        path: 'basic-info',
+        hidden: false,
+        component: () => import('@/views/quotation/basic/index'),
+        meta: {
+          title: '基本信息管理',
+          icon: 'bike',
+          noCache: false
+        }
+      },
+      {
+        name: 'Quotation',
+        path: 'quotation',
+        hidden: false,
+        component: () => import('@/views/quotation/index'),
+        meta: {
+          title: '报价单管理',
+          icon: 'quotation',
+          noCache: true
+        }
+      }
+    ]
+  },
+
   // 404 页面必须放在最后
   { path: '*', redirect: '/404', hidden: true }
 ]

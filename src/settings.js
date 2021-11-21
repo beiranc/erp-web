@@ -24,5 +24,20 @@ module.exports = {
    * @type {boolean} true | false
    * @description 是否显示设置面板
    */
-  showSettings: false
+  showSettings: false,
+
+  /**
+   * 是否显示页面底部信息
+   */
+  showFooter: true,
+
+  /**
+   * 底部文字部分
+   */
+  footerContent: '&copy; 2021 beiranc <a href="https://opensource.org/licenses/MIT" target="_blank">MIT License</a>',
+
+  /**
+   * 备案号
+   */
+  caseNumber: '桂ICP备2021004721号-1'
 }

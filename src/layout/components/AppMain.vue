@@ -5,6 +5,12 @@
         <router-view :key="key" />
       </keep-alive>
     </transition>
+    <!-- 底部, 展示网站版权信息以及备案信息 -->
+    <div v-if="$store.state.settings.showFooter" id="erp-main-footer">
+        <span v-html="$store.state.settings.footerContent" />
+        <span> · </span>
+        <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">{{ $store.state.settings.caseNumber }}</a>
+    </div>
   </section>
 </template>
 
@@ -45,13 +51,20 @@ export default {
     padding-top: 84px;
   }
 }
-</style>
 
-<style lang="scss">
-// fix css style bug in open el-dialog
-.el-popup-parent--hidden {
-  .fixed-header {
-    padding-right: 15px;
-  }
+#erp-main-footer {
+    background: none repeat scroll 0 0 white;
+    border-top: 1px solid #e7eaec;
+    overflow: hidden;
+    padding: 10px 6px 0 6px;
+    height: 33px;
+    font-size: 0.7rem !important;
+    color: #7a8b9a;
+    letter-spacing: 0.8px;
+    font-family: Arial, sans-serif !important;
+    position: fixed;
+    bottom: 0;
+    z-index: 99;
+    width: 100%;
 }
 </style>

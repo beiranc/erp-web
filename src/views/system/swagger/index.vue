@@ -11,7 +11,7 @@ export default {
   components: { iFrame },
   data() {
     const devUrl = 'http://localhost:9001/swagger-ui.html'
-    const prodUrl = 'http://114.55.255.214:9001/swagger-ui.html'
+    const prodUrl = 'https://beiran.icu/swagger-ui.html'
     return {
       swaggerUrl: process.env.NODE_ENV === 'development' ? devUrl : prodUrl
     }
